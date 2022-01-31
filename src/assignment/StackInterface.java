@@ -1,8 +1,8 @@
-/*
- * Honor code
- */
 package assignment;
-
+/*
+ * I affirm that I have carried out my academic endeavors with full academic honesty.
+ * [Signed, Khai Dong]
+ */
 import java.util.EmptyStackException;
 
 /**

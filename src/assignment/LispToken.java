@@ -1,10 +1,14 @@
 package assignment;
-
+/*
+ * I affirm that I have carried out my academic endeavors with full academic honesty.
+ * [Signed, Khai Dong]
+ */
 /**
  * This class represents either an operand or an operator for an arithmetic
  * expressions in Lisp.
  *
  * @author Charles Hoot
+ * @author Khai Dong modified
  * @version 5.0
  */
 public class LispToken {

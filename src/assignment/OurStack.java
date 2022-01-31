@@ -1,11 +1,15 @@
 package assignment;
-
+/*
+ * I affirm that I have carried out my academic endeavors with full academic honesty.
+ * [Signed, Khai Dong]
+ */
 import java.util.Stack;
 
 /**
  * A class of stacks.
  *
  * @author Frank M. Carrano
+ * @author Khai Dong modified
  * @version 5.0
  */
 public class OurStack<T> implements StackInterface<T> {
