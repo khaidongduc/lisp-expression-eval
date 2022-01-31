@@ -66,6 +66,9 @@ public class LispExpressionEvaluator {
      * The expression '(+ (-) (* 3 3 4) (/ 3 2 3) (* 4 4))' is not legal in Lisp:
      * operator - requires at least one operand
      *
+     * Time complexity is O(n) overall since we only iterate through the expression
+     * and push and pop each element once.
+     *
      * @param lispExp A string that is a valid lisp expression.
      * @param mes     An ArrayList of strings that stores the messages generated.
      * @return A double that is the value of the expression.
