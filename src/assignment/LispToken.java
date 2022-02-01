@@ -19,6 +19,7 @@ public class LispToken {
     /**
      * Constructor for objects of class LispToken for operators.
      * isOperator is true and operand is 0.0, operator is anOperator
+     * O(1)
      *
      * @param anOperator of type Character
      */
@@ -29,6 +30,7 @@ public class LispToken {
     /**
      * Constructor for objects of class LispToken for operands.
      * isOperator is false and operand is the value, operator is ' '
+     * O(1)
      *
      * @param value of type Double
      */
@@ -36,6 +38,16 @@ public class LispToken {
         this(' ', value, false);
     }
 
+    /**
+     * helper constructor class
+     * will set the value to anything
+     * do not set to public
+     * O(1)
+     *
+     * @param operator the new operator
+     * @param operand the new operand
+     * @param isOperator whether this is an operator
+     */
     private LispToken(Character operator, Double operand, boolean isOperator) {
         this.operator = operator;
         this.operand = operand;
@@ -44,6 +56,7 @@ public class LispToken {
 
     /**
      * applyOperator: Applies this operator to two given operand values.
+     * O(1)
      *
      * @param value1 The value of the first operand.
      * @param value2 The value of the second operand.
@@ -75,6 +88,7 @@ public class LispToken {
     /**
      * getIdentity: Gets the identity value of this operator. For example, x + 0 = x, so 0 is the
      * identity for + and will be the value associated with the expression (+).
+     * O(1)
      *
      * @return The identity value of the operator as Double.
      */
@@ -96,6 +110,7 @@ public class LispToken {
 
     /**
      * takesZeroOperands: Detects whether this operator returns a value when it has no operands.
+     * O(1)
      *
      * @return True if the operator returns a value when it has no operands, or
      * false if not.
@@ -103,11 +118,12 @@ public class LispToken {
     public boolean takesZeroOperands() {
         if (!this.isOperator()) return false;
         Character operator = this.operator;
-        return operator == '*' || operator == '+';
+        return operator.equals('*') || operator.equals('+');
     }
 
     /**
      * getValue: Gets the value of this operand.
+     * O(1)
      *
      * @return The real value of the operand.
      */
@@ -116,7 +132,19 @@ public class LispToken {
     }
 
     /**
+     * getOperator: Gets the operator of this LispToken.
+     * O(1)
+     *
+     * @return The operator (Character).
+     */
+    public Character getOperator() {
+        return this.operator;
+    }
+
+
+    /**
      * isOperator: Returns true if the object is an operator.
+     * O(1)
      *
      * @return True is this object is an operator.
      */
@@ -126,13 +154,13 @@ public class LispToken {
 
     /**
      * toString: Returns a string representation of the operator or operand
-     *
+     * O(1)
      * @return String
      */
     @Override
     public String toString() {
-        if (this.isOperator()) return operator.toString();
-        return this.operand.toString();
+        if (this.isOperator()) return this.getOperator().toString();
+        return this.getValue().toString();
     }
 
 }
