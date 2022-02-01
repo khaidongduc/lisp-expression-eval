@@ -143,11 +143,22 @@ public class LispExpressionEvaluator {
         }
     }
 
+    /**
+     * evaluate the current expression after a ')'
+     * just evaluate the last expression pushed into the expressionStack
+     * @param expressionStack the current expressionStack
+     * @param secondStack the helper stack
+     * @throws Exception the exception includes the error message
+     */
     private static void evaluateCurrentOperation(
             StackInterface<LispToken> expressionStack,
             StackInterface<LispToken> secondStack) throws Exception {
-        int numberOfOperands = 0;
 
+        // clear the second stack
+        // the second stack has to be empty
+        secondStack.clear();
+
+        int numberOfOperands = 0;
         while (!expressionStack.isEmpty() && !expressionStack.peek().isOperator()) {
             LispToken expression = expressionStack.pop();
             secondStack.push(expression);
@@ -160,7 +171,7 @@ public class LispExpressionEvaluator {
         }
 
         LispToken operator = expressionStack.pop();
-        char operatorChar = operator.toString().charAt(0);
+        char operatorChar = operator.getOperator();
         Double expressionValue = null;
         if (numberOfOperands == 0) {
             if (operator.takesZeroOperands()) {
@@ -173,7 +184,6 @@ public class LispExpressionEvaluator {
             double defaultValue = (operatorChar == '+' || operatorChar == '-') ? 0.0 : 1.0;
             expressionValue = operator.applyOperator(defaultValue, operandToken.getValue());
         } else {
-
             switch (operatorChar) {
                 case '+':
                     expressionValue = 0.0;
@@ -186,12 +196,10 @@ public class LispExpressionEvaluator {
                     expressionValue = secondStack.pop().getValue();
                     break;
             }
-
             while (!secondStack.isEmpty()) {
                 LispToken removed = secondStack.pop();
                 expressionValue = operator.applyOperator(expressionValue, removed.getValue());
             }
-
         }
         expressionStack.push(new LispToken(expressionValue));
     }
