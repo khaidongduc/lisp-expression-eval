@@ -79,4 +79,15 @@ public class OurStack<T> implements StackInterface<T> {
         this.theStack.clear();
     }
 
+    // smoke test - basic
+    public static void main(String[] args) {
+        OurStack<String> stack = new OurStack<String>();
+        stack.push("A");
+
+        System.out.printf("peek, expected: A, Actual: %s%n", stack.peek());
+        System.out.printf("isEmpty, expected: false, Actual: %s%n", stack.isEmpty());
+        System.out.printf("peek, expected: A, Actual: %s%n", stack.pop());
+        System.out.printf("isEmpty, expected: true, Actual: %s%n", stack.isEmpty());
+    }
+
 } // end OurStack
