@@ -52,8 +52,8 @@ public class LispTokenTest {
                 LispToken operator = new LispToken('+');
                 Double result = operator.applyOperator(1.0, 2.0);
                 assertEquals("1.0 + 2.0 = 3.0", 3.0, result, DELTA);
-            } catch (Exception ignored) {
-                fail();
+            } catch (Exception e) {
+                fail(Arrays.toString(e.getStackTrace()));;
             }
         }
 
@@ -63,8 +63,8 @@ public class LispTokenTest {
                 LispToken operator = new LispToken('-');
                 Double result = operator.applyOperator(1.0, 2.0);
                 assertEquals("1.0 - 2.0 = 3.0", -1.0, result, DELTA);
-            } catch (Exception ignored) {
-                fail();
+            } catch (Exception e) {
+                fail(Arrays.toString(e.getStackTrace()));;
             }
         }
 
@@ -74,8 +74,8 @@ public class LispTokenTest {
                 LispToken operator = new LispToken('*');
                 Double result = operator.applyOperator(2.0, 2.0);
                 assertEquals("2.0 * 2.0 = 4.0", 4.0, result, DELTA);
-            } catch (Exception ignored) {
-                fail();
+            } catch (Exception e) {
+                fail(Arrays.toString(e.getStackTrace()));;
             }
         }
 
@@ -85,8 +85,8 @@ public class LispTokenTest {
                 LispToken operator = new LispToken('/');
                 Double result = operator.applyOperator(1.0, 2.0);
                 assertEquals("1.0 / 2.0 = 0.5", 0.5, result, DELTA);
-            } catch (Exception ignored) {
-                fail();
+            } catch (Exception e) {
+                fail(Arrays.toString(e.getStackTrace()));;
             }
         }
 
@@ -96,8 +96,8 @@ public class LispTokenTest {
                 LispToken operator = new LispToken('8');
                 Double result = operator.applyOperator(1.0, 2.0);
                 assertNull(result);
-            } catch (Exception ignored) {
-                fail();
+            } catch (Exception e) {
+                fail(Arrays.toString(e.getStackTrace()));;
             }
         }
 
