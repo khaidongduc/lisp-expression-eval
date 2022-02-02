@@ -172,10 +172,12 @@ public class LispToken {
         System.out.println(operator.applyOperator(1.0, 2.0));
         System.out.println("Expected: 3.0");
         System.out.println(operator);
+        System.out.println("Expected: +");
 
         System.out.println();
         LispToken operand = new LispToken(2.0);
         System.out.println(operand);
+        System.out.println("Expected: 2.0");
 
     }
 
