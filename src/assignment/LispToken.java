@@ -20,6 +20,9 @@ public class LispToken {
      * Constructor for objects of class LispToken for operators.
      * isOperator is true and operand is 0.0, operator is anOperator
      * O(1)
+     * any character is allowed,
+     * but the applyOperation method will return null
+     * until the operator is set to a correct one
      *
      * @param anOperator of type Character
      */
