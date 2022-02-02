@@ -22,7 +22,6 @@ public class LispToken {
      * O(1)
      * any character is allowed,
      * but the applyOperation method will return null
-     * until the operator is set to a correct one
      *
      * @param anOperator of type Character
      */
