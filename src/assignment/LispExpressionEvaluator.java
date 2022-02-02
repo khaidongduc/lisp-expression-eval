@@ -3,6 +3,7 @@ package assignment;
  * I affirm that I have carried out my academic endeavors with full academic honesty.
  * [Signed, Khai Dong]
  */
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,6 +18,16 @@ import java.util.Scanner;
  * @version 5.0
  */
 public class LispExpressionEvaluator {
+
+    /**
+     * private exception class for throw exception while evaluate LISP
+     */
+    private static class LispExpressionException extends Exception {
+        public LispExpressionException(String message) {
+            super(message);
+        }
+    }
+
     /**
      * Evaluates a Lisp expression.
      * <p>
@@ -68,7 +79,7 @@ public class LispExpressionEvaluator {
      * <p>
      * The expression '(+ (-) (* 3 3 4) (/ 3 2 3) (* 4 4))' is not legal in Lisp:
      * operator - requires at least one operand
-     *
+     * <p>
      * Time complexity is O(n) overall since we only iterate through the expression
      * and push and pop each element once.
      *
@@ -107,7 +118,7 @@ public class LispExpressionEvaluator {
                         case '*':
                         case '/':
                             if (!nextIsOperator) {
-                                throw new Exception("found an operator when we should not");
+                                throw new LispExpressionException("found an operator when we should not");
                             }
                             expressionStack.push(new LispToken(ch));
                             nextIsOperator = false;
@@ -116,7 +127,7 @@ public class LispExpressionEvaluator {
                             evaluateCurrentOperation(expressionStack, secondStack);
                             break;
                         default:
-                            throw new Exception("found an illegal character");
+                            throw new LispExpressionException("found an illegal character");
                     }
                 }
             }
@@ -127,14 +138,14 @@ public class LispExpressionEvaluator {
                 // and there are multiple expressions
                 // at the end
                 // we can reduce any further
-                throw new Exception("incomplete expression / multiple expressions");
+                throw new LispExpressionException("incomplete expression / multiple expressions");
             }
             mes.add(String.format(
                     "The expression '%s'\nis legal in Lisp:\nand evaluates to %f\n",
                     lispExp, res
             ));
             return res;
-        } catch (Exception e) {
+        } catch (LispExpressionException e) {
             mes.add(String.format(
                     "The expression '%s'\nis not legal in Lisp:\n%s\n",
                     lispExp, e.getMessage()
@@ -146,13 +157,14 @@ public class LispExpressionEvaluator {
     /**
      * evaluate the current expression after a ')'
      * just evaluate the last expression pushed into the expressionStack
+     *
      * @param expressionStack the current expressionStack
-     * @param secondStack the helper stack
-     * @throws Exception the exception includes the error message
+     * @param secondStack     the helper stack
+     * @throws LispExpressionException the exception includes the error message
      */
     private static void evaluateCurrentOperation(
             StackInterface<LispToken> expressionStack,
-            StackInterface<LispToken> secondStack) throws Exception {
+            StackInterface<LispToken> secondStack) throws LispExpressionException {
 
         // clear the second stack
         // the second stack has to be empty
@@ -167,7 +179,7 @@ public class LispExpressionEvaluator {
         if (expressionStack.isEmpty()) {
             // in the case where there is a ')' and there is no operator
             // there is a mismatched ')'
-            throw new Exception("mismatched )");
+            throw new LispExpressionException("mismatched )");
         }
 
         LispToken operator = expressionStack.pop();
@@ -177,7 +189,7 @@ public class LispExpressionEvaluator {
             if (operator.takesZeroOperands()) {
                 expressionValue = operator.getIdentity();
             } else {
-                throw new Exception(String.format("operator %s requires at least one operand", operatorChar));
+                throw new LispExpressionException(String.format("operator %s requires at least one operand", operatorChar));
             }
         } else if (numberOfOperands == 1) {
             LispToken operandToken = secondStack.pop();
