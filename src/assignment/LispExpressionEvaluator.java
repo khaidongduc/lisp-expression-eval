@@ -196,18 +196,7 @@ public class LispExpressionEvaluator {
             double defaultValue = (operatorChar == '+' || operatorChar == '-') ? 0.0 : 1.0;
             expressionValue = operator.applyOperator(defaultValue, operandToken.getValue());
         } else {
-            switch (operatorChar) {
-                case '+':
-                    expressionValue = 0.0;
-                    break;
-                case '*':
-                    expressionValue = 1.0;
-                    break;
-                case '-':
-                case '/':
-                    expressionValue = secondStack.pop().getValue();
-                    break;
-            }
+            expressionValue = secondStack.pop().getValue();
             while (!secondStack.isEmpty()) {
                 LispToken removed = secondStack.pop();
                 expressionValue = operator.applyOperator(expressionValue, removed.getValue());
