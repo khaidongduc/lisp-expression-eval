@@ -193,7 +193,7 @@ public class LispExpressionEvaluator {
             }
         } else if (numberOfOperands == 1) {
             LispToken operandToken = secondStack.pop();
-            double defaultValue = (operatorChar == '+' || operatorChar == '-') ? 0.0 : 1.0;
+            double defaultValue = operator.getIdentity();
             expressionValue = operator.applyOperator(defaultValue, operandToken.getValue());
         } else {
             expressionValue = secondStack.pop().getValue();
